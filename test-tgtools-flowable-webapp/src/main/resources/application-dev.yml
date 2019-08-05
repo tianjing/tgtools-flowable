@@ -1,0 +1,24 @@
+spring.datasource.dev.name: platform
+spring.datasource.dev.url: jdbc:dm://192.168.88.128:5235
+spring.datasource.dev.username: FLOWABLE
+spring.datasource.dev.password: FLOWABLE123
+spring.datasource.dev.driverClassName: dm.jdbc.driver.DmDriver
+spring.datasource.dev.initialSize: 5
+spring.datasource.dev.minIdle: 5
+spring.datasource.dev.maxActive: 20
+spring.datasource.dev.maxWait: 60000
+spring.datasource.dev.poolPreparedStatements: true
+spring.datasource.dev.maxPoolPreparedStatementPerConnectionSize: 20
+spring.datasource.dev.useGlobalDataSourceStat: true
+spring.datasource.dev.logType: slf4j
+spring.datasource.dev.timeBetweenEvictionRunsMillis: 60000
+spring.datasource.dev.minEvictableIdleTimeMillis: 300000
+spring.datasource.dev.validationQuery: SELECT 1
+spring.datasource.dev.testWhileIdle: true
+spring.datasource.dev.testOnBorrow: false
+spring.datasource.dev.testOnReturn: true
+
+
+#flowable.common.app.idm-url: http://localhost:8080/flowable-idm
+#flowable.common.app.idm-admin.user: admin
+#flowable.common.app.idm-admin.password: test
