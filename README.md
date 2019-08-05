@@ -1,7 +1,8 @@
 # tgtools-flowable
 tgtools-flowable
 
-#说明
+##说明
+
 项目初衷
 解决flowable 支持 达梦库。
 
@@ -13,7 +14,8 @@ tgtools-flowable
 
 版本规则 6.4.2.0 前三位为 flowable 版本号，第四位为本项目版号
 
-#目标
+##目标
+
 支持达梦7；
 
 支持模型管理；
@@ -22,7 +24,8 @@ tgtools-flowable
 
 取消idm、用户权限表单等，成为一个类似 activiti一样一个独立框架使用；
 
-#问题
+##问题
+
 CNNM 案例模型
 
 DMN 决策
