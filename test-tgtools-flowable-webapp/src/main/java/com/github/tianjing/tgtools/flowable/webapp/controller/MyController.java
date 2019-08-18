@@ -1,6 +1,6 @@
 package com.github.tianjing.tgtools.flowable.webapp.controller;
 
-import com.github.tianjing.tgtools.flowable.webapp.service.FlowService;
+import com.github.tianjing.tgtools.flowable.autoconfigure.service.FlowService;
 import org.flowable.engine.*;
 import org.flowable.idm.api.User;
 import org.flowable.ui.common.security.SecurityUtils;
