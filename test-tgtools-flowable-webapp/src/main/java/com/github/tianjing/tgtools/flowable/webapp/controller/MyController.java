@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import tgtools.exceptions.APPErrorException;
 
 import java.util.HashMap;
 
@@ -60,7 +61,7 @@ public class MyController {
     }
 
     @RequestMapping(value = "deloy", method = RequestMethod.GET)
-    public String deloy() {
+    public String deloy() throws APPErrorException {
         flowService.deloy(modelId);
         return "1";
     }

@@ -35,15 +35,34 @@ public class DmJdbcDatabaseSnapshot extends JdbcDatabaseSnapshot {
 
     private Set<String> userDefinedTypes;
 
-
+    /**
+     *
+     * @param examples
+     * @param database
+     * @param snapshotControl
+     * @throws DatabaseException
+     * @throws InvalidExampleException
+     */
     public DmJdbcDatabaseSnapshot(DatabaseObject[] examples, Database database, SnapshotControl snapshotControl) throws DatabaseException, InvalidExampleException {
         super(examples, database, snapshotControl);
     }
 
+    /**
+     *
+     * @param examples
+     * @param database
+     * @throws DatabaseException
+     * @throws InvalidExampleException
+     */
     public DmJdbcDatabaseSnapshot(DatabaseObject[] examples, Database database) throws DatabaseException, InvalidExampleException {
         super(examples, database);
     }
 
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     @Override
     public CachingDatabaseMetaData getMetaDataFromCache() throws SQLException {
         if (cachingDatabaseMetaData == null) {
@@ -56,6 +75,10 @@ public class DmJdbcDatabaseSnapshot extends JdbcDatabaseSnapshot {
         }
         return cachingDatabaseMetaData;
     }
+
+    /**
+     *
+     */
     public class DmCachingDatabaseMetaData extends CachingDatabaseMetaData {
 
 
@@ -151,6 +174,12 @@ public class DmJdbcDatabaseSnapshot extends JdbcDatabaseSnapshot {
                     }
                 }
 
+                /**
+                 *
+                 * @return
+                 * @throws SQLException
+                 * @throws DatabaseException
+                 */
                 @Override
                 public List<CachedRow> bulkFetch() throws SQLException, DatabaseException {
                     if (database instanceof OracleDatabase) {

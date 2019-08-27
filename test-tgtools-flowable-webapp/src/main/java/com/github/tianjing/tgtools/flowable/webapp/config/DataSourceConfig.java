@@ -1,6 +1,6 @@
 package com.github.tianjing.tgtools.flowable.webapp.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,8 +20,7 @@ public class DataSourceConfig {
             prefix = "spring.datasource.dev"
     )
     public DataSource myDataSource() {
-        DruidDataSource vDatasource = new DruidDataSource();
-        //(new TgtoolsConfig()).loadDataSource("MyDATAACCESS",vDatasource);
+        HikariDataSource vDatasource = new HikariDataSource();
         return vDatasource;
     }
 

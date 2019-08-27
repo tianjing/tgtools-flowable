@@ -5,16 +5,15 @@
     <parent>
         <artifactId>tgtools-flowable</artifactId>
         <groupId>com.github.tianjing</groupId>
-        <version>6.4.2.0-SNAPSHOT</version>
+        <version>6.4.2.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>tgtools-flowable-autoconfigure</artifactId>
 
-    <properties>
-        <java.version>1.8</java.version>
-        <flowable.version>6.4.2</flowable.version>
-    </properties>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <url>https://github.com/tianjing/tgtools-flowable.git</url>
+    <description>flowable 功能扩展并将模型管理单独拿出来便于项目依赖，具体参看test-tgtools-flowable-webapp</description>
 
     <dependencies>
         <dependency>
@@ -26,7 +25,7 @@
         <dependency>
             <groupId>com.github.tianjing</groupId>
             <artifactId>tgtools-flowable-db-dm</artifactId>
-            <version>6.4.2.0-SNAPSHOT</version>
+            <version>6.4.2.0</version>
         </dependency>
 
         <dependency>
@@ -63,6 +62,8 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+
         <dependency>
             <groupId>org.flowable</groupId>
             <artifactId>flowable-ui-modeler-logic</artifactId>
@@ -78,20 +79,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+
         <dependency>
             <groupId>org.flowable</groupId>
             <artifactId>flowable-ui-modeler-conf</artifactId>
             <version>6.4.2</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.logging.log4j</groupId>
-                    <artifactId>*</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-log4j2</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
@@ -100,18 +93,5 @@
             <version>7.6.0.77</version>
         </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                    <encoding>utf-8</encoding>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+
 </project>

@@ -1,12 +1,5 @@
 package com.github.tianjing.tgtools.flowable.db.dm.ext;
 
-/**
- * @author 田径
- * @Title
- * @Description
- * @date 19:37
- */
-
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.defaults.DefaultSqlSessionFactory;
@@ -18,7 +11,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
-
+/**
+ * @author 田径
+ * @Title
+ * @Description
+ * @date 19:37
+ */
 public class DmProcessEngineConfigurationImpl extends SpringProcessEngineConfiguration {
     public DmProcessEngineConfigurationImpl() {
         addDatabaseTypeMappings();
@@ -28,6 +26,9 @@ public class DmProcessEngineConfigurationImpl extends SpringProcessEngineConfigu
         databaseTypeMappings.setProperty("DM DBMS", "dm");
     }
 
+    /**
+     *
+     */
     @Override
     public void initSqlSessionFactory() {
         if (this.sqlSessionFactory == null) {
@@ -65,6 +66,10 @@ public class DmProcessEngineConfigurationImpl extends SpringProcessEngineConfigu
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String pathToEngineDbProperties() {
         return "org/flowable/common/db/properties/" + ("dm".equals(this.databaseType) ? "oracle" : this.databaseType) + ".properties";
