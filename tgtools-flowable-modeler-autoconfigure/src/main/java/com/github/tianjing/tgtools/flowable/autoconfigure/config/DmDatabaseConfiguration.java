@@ -83,6 +83,10 @@ public class DmDatabaseConfiguration  {//extends DatabaseConfiguration {
         databaseTypeMappings.setProperty("DB2/2", "db2");
         databaseTypeMappings.setProperty("DB2 UDB AS400", "db2");
         databaseTypeMappings.setProperty("DM DBMS", "dm");
+
+        DatabaseFactory.getInstance().register(new DmDatabase());
+        DmSnapshotGeneratorFactory.init();
+
         return databaseTypeMappings;
     }
 
@@ -117,12 +121,7 @@ public class DmDatabaseConfiguration  {//extends DatabaseConfiguration {
 
     @Bean
     public Liquibase liquibase(DataSource dataSource) {
-        DmSnapshotGeneratorFactory.init();
-
-        LOGGER.info("Configuring Liquibase");
-        DatabaseFactory.getInstance().register(new DmDatabase());
-
-
+       // LOGGER.info("Configuring Liquibase");
         Liquibase liquibase = null;
         try {
             DatabaseConnection connection = new JdbcConnection(dataSource.getConnection());
@@ -131,7 +130,7 @@ public class DmDatabaseConfiguration  {//extends DatabaseConfiguration {
             database.setDatabaseChangeLogLockTableName(LIQUIBASE_CHANGELOG_PREFIX + database.getDatabaseChangeLogLockTableName());
 
             liquibase = new Liquibase("META-INF/liquibase/flowable-modeler-app-db-changelog.xml", new ClassLoaderResourceAccessor(), database);
-
+            liquibase.update("flowable");
             return liquibase;
         } catch (Exception var9) {
             throw new InternalServerErrorException("Error creating liquibase database", var9);

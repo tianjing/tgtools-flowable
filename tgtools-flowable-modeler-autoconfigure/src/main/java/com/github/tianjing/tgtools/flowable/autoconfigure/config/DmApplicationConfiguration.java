@@ -42,7 +42,6 @@ import org.springframework.web.servlet.DispatcherServlet;
 public class DmApplicationConfiguration {
 
     public DmApplicationConfiguration() {
-
     }
 
     @Bean

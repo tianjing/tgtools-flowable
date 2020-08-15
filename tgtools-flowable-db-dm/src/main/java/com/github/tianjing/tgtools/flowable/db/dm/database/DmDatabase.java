@@ -4,6 +4,8 @@ import liquibase.CatalogAndSchema;
 import liquibase.database.DatabaseConnection;
 import liquibase.database.core.OracleDatabase;
 import liquibase.exception.DatabaseException;
+import liquibase.statement.SqlStatement;
+import liquibase.statement.core.RawCallStatement;
 import liquibase.structure.core.Schema;
 
 /**
@@ -95,5 +97,8 @@ public class DmDatabase extends OracleDatabase {
         }
         return null;
     }
-
+    @Override
+    protected SqlStatement getConnectionSchemaNameCallStatement(){
+        return new RawCallStatement("select user");
+    }
 }

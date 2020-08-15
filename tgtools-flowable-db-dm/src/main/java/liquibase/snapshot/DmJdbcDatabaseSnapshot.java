@@ -805,8 +805,8 @@ public class DmJdbcDatabaseSnapshot extends JdbcDatabaseSnapshot {
             });
             return columns;
         }
-
-        public List<CachedRow> getTables(final String catalogName, final String schemaName, final String table) throws SQLException, DatabaseException {
+        @Override
+        public List<CachedRow> getTables(final String catalogName, final String schemaName, final String table) throws  DatabaseException {
             return getResultSetCache("getTables").get(new ResultSetCache.SingleResultSetExtractor(database) {
 
                 @Override
@@ -936,8 +936,8 @@ public class DmJdbcDatabaseSnapshot extends JdbcDatabaseSnapshot {
                 }
             });
         }
-
-        public List<CachedRow> getViews(final String catalogName, final String schemaName, final String view) throws SQLException, DatabaseException {
+        @Override
+        public List<CachedRow> getViews(final String catalogName, final String schemaName, final String view) throws  DatabaseException {
             return getResultSetCache("getViews").get(new ResultSetCache.SingleResultSetExtractor(database) {
 
                 @Override
@@ -1018,8 +1018,8 @@ public class DmJdbcDatabaseSnapshot extends JdbcDatabaseSnapshot {
                 }
             });
         }
-
-        public List<CachedRow> getPrimaryKeys(final String catalogName, final String schemaName, final String table) throws SQLException, DatabaseException {
+        @Override
+        public List<CachedRow> getPrimaryKeys(final String catalogName, final String schemaName, final String table) throws  DatabaseException {
             return getResultSetCache("getPrimaryKeys").get(new ResultSetCache.SingleResultSetExtractor(database) {
 
                 @Override
@@ -1210,7 +1210,7 @@ public class DmJdbcDatabaseSnapshot extends JdbcDatabaseSnapshot {
             });
         }
         @Override
-        public List<CachedRow> getUniqueConstraints(final String catalogName, final String schemaName, final String tableName) throws SQLException, DatabaseException {
+        public List<CachedRow> getUniqueConstraints(final String catalogName, final String schemaName, final String tableName) throws  DatabaseException {
             return getResultSetCache("getUniqueConstraints").get(new ResultSetCache.SingleResultSetExtractor(database) {
 
                 @Override

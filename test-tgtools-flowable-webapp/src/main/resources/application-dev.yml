@@ -1,7 +1,7 @@
 spring.datasource.dev.name: platform
 spring.datasource.dev.jdbcUrl: jdbc:dm://192.168.88.128:5235
-spring.datasource.dev.username: FLOWABLE
-spring.datasource.dev.password: FLOWABLE123
+spring.datasource.dev.username: FLOWABLE6_5
+spring.datasource.dev.password: FLOWABLE6_5
 spring.datasource.dev.driverClassName: dm.jdbc.driver.DmDriver
 spring.datasource.dev.initialSize: 5
 spring.datasource.dev.minIdle: 5
