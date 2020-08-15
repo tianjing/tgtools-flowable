@@ -74,7 +74,7 @@
                 <version>3.1.1</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
-                    <aggregate>true</aggregate>
+<!--                    <aggregate>true</aggregate>-->
                     <charset>UTF-8</charset>
                     <docencoding>UTF-8</docencoding>
                     <failOnError>false</failOnError>
