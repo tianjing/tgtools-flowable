@@ -32,15 +32,14 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
- *
- *
  * 添加对 dm7 库的支持
+ *
  * @author 田径
  * @create 2019-07-28 14:56
  * @desc
  **/
 @Configuration
-public class DmDatabaseConfiguration  {//extends DatabaseConfiguration {
+public class DmDatabaseConfiguration {//extends DatabaseConfiguration {
 
     protected static final String LIQUIBASE_CHANGELOG_PREFIX = "ACT_DE_";
     private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseConfiguration.class);
@@ -91,11 +90,12 @@ public class DmDatabaseConfiguration  {//extends DatabaseConfiguration {
     }
 
     @Bean(destroyMethod = "clearCache")
-    public SqlSessionTemplate SqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
+    public SqlSessionTemplate dmFlowableSqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
+
     @Bean
-    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) {
+    public SqlSessionFactory dmFlowableSqlSessionFactory(DataSource dataSource) {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
         String databaseType = this.initDatabaseType(dataSource);
@@ -121,7 +121,7 @@ public class DmDatabaseConfiguration  {//extends DatabaseConfiguration {
 
     @Bean
     public Liquibase liquibase(DataSource dataSource) {
-       // LOGGER.info("Configuring Liquibase");
+        // LOGGER.info("Configuring Liquibase");
         Liquibase liquibase = null;
         try {
             DatabaseConnection connection = new JdbcConnection(dataSource.getConnection());
@@ -142,6 +142,7 @@ public class DmDatabaseConfiguration  {//extends DatabaseConfiguration {
 
     /**
      * 初始化
+     *
      * @param dataSource
      * @return
      */

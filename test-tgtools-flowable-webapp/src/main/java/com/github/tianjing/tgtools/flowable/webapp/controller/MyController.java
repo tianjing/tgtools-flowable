@@ -51,8 +51,8 @@ public class MyController {
     ApplicationContext applicationContext;
     @Autowired
     FlowService flowService;
-    String modelId = "063284b9-b207-11e9-887b-ac2b6e2536bd";//1bf5f9dd-dec5-11ea-a29b-a86daa000424
-    String flowId = "fdadf:1:eec8175f-c0fd-11e9-aaff-ac2b6e2536bd";
+    String modelId = "1bf5f9dd-dec5-11ea-a29b-a86daa000424";//1bf5f9dd-dec5-11ea-a29b-a86daa000424
+    String flowId = "bbbb:2:f95a58fb-dec6-11ea-81c1-a86daa000424";
 
     @ResponseBody
     @RequestMapping(value = "account", method = RequestMethod.GET)

@@ -9,6 +9,7 @@ import org.flowable.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.flowable.spring.ProcessEngineFactoryBean;
 import org.flowable.spring.SpringProcessEngineConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -23,6 +24,9 @@ import javax.sql.DataSource;
 @Configuration
 public class FlowableConfig {
 
+    @Value("${flowable.database-schema-update:true}")
+    private String databaseSchemaUpdate;
+
     @Autowired
     protected PlatformTransactionManager platformTransactionManager;
     @Autowired
@@ -36,7 +40,7 @@ public class FlowableConfig {
         //设置数据源
         conf.setDataSource(dataSource);
         //自动更新表
-        conf.setDatabaseSchemaUpdate("true");
+        conf.setDatabaseSchemaUpdate(databaseSchemaUpdate);
         //达梦7
         conf.setDatabaseType("dm");
 
@@ -57,7 +61,7 @@ public class FlowableConfig {
         //设置数据源
         configuration.setDataSource(dataSource);
         //自动更新表
-        configuration.setDatabaseSchemaUpdate("true");
+        configuration.setDatabaseSchemaUpdate(databaseSchemaUpdate);
         //达梦7
         configuration.setDatabaseType("dm");
 

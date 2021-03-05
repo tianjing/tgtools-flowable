@@ -14,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @create 2019-07-28 11:49
  * @desc
  **/
+
 @Configuration
 public class MyWebMvcConfigurerAdapter  implements WebMvcConfigurer {
     //静态资源配置

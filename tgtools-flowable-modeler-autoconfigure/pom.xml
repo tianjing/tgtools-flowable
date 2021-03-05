@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>tgtools-flowable-modeler-autoconfigure</artifactId>
+    <version>6.5.0.1</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <url>https://github.com/tianjing/tgtools-flowable.git</url>
