@@ -21,7 +21,7 @@
 
     <groupId>com.github.tianjing</groupId>
     <artifactId>tgtools-flowable</artifactId>
-    <version>6.5.0.0</version>
+    <version>6.5.0.1</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <url>https://github.com/tianjing/tgtools-flowable.git</url>

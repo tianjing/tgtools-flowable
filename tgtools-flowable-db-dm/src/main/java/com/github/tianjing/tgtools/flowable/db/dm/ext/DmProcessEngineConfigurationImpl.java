@@ -18,8 +18,11 @@ import java.util.Properties;
  * @date 19:37
  */
 public class DmProcessEngineConfigurationImpl extends SpringProcessEngineConfiguration {
+    public static final String DEFAULT_MYBATIS_MAPPING_FILE_DM = "com/github/tianjing/tgtools/flowable/db/dm/mapping/mappings.xml";
+
     public DmProcessEngineConfigurationImpl() {
         addDatabaseTypeMappings();
+        mybatisMappingFile = DEFAULT_MYBATIS_MAPPING_FILE_DM;
     }
 
     protected void addDatabaseTypeMappings() {
@@ -67,7 +70,6 @@ public class DmProcessEngineConfigurationImpl extends SpringProcessEngineConfigu
     }
 
     /**
-     *
      * @return
      */
     @Override
