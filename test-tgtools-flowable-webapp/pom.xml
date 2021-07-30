@@ -20,7 +20,7 @@
         <dependency>
             <groupId>com.github.tianjing</groupId>
             <artifactId>tgtools-flowable-modeler-autoconfigure</artifactId>
-            <version>6.5.0.1</version>
+            <version>6.5.0.2</version>
         </dependency>
 
         <dependency>
