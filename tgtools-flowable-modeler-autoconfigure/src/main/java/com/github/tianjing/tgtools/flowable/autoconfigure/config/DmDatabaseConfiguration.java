@@ -20,6 +20,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ResourceLoader;
@@ -95,7 +96,7 @@ public class DmDatabaseConfiguration {//extends DatabaseConfiguration {
     }
 
     @Bean
-    public SqlSessionFactory dmFlowableSqlSessionFactory(DataSource dataSource) {
+    public SqlSessionFactory dmFlowableSqlSessionFactory(@Qualifier("flowableDataSource")DataSource dataSource) {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
         String databaseType = this.initDatabaseType(dataSource);
@@ -120,7 +121,7 @@ public class DmDatabaseConfiguration {//extends DatabaseConfiguration {
 
 
     @Bean
-    public Liquibase liquibase(DataSource dataSource) {
+    public Liquibase liquibase(@Qualifier("flowableDataSource")DataSource dataSource) {
         // LOGGER.info("Configuring Liquibase");
         Liquibase liquibase = null;
         try {
@@ -146,7 +147,7 @@ public class DmDatabaseConfiguration {//extends DatabaseConfiguration {
      * @param dataSource
      * @return
      */
-    protected String initDatabaseType(DataSource dataSource) {
+    protected String initDatabaseType(@Qualifier("flowableDataSource")DataSource dataSource) {
         String databaseType = null;
         Connection connection = null;
 
