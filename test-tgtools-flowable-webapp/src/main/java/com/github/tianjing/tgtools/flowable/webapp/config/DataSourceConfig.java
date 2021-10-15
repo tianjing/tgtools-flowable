@@ -16,9 +16,9 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfig {
 
-    @Bean({"faeDataSource"})
+    @Bean({"flowableDataSource"})
     @ConfigurationProperties(
-            prefix = "spring.datasource"
+            prefix = "spring.datasource.dev"
     )
     public DataSource myDataSource() {
         HikariDataSource vDatasource = new HikariDataSource();
