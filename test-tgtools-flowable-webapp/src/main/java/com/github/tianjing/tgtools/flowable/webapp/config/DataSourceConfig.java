@@ -2,6 +2,7 @@ package com.github.tianjing.tgtools.flowable.webapp.config;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -16,13 +17,24 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfig {
 
-    @Bean({"flowableDataSource"})
+
+    @Bean
     @ConfigurationProperties(
             prefix = "spring.datasource.dev"
     )
-    public DataSource myDataSource() {
-        HikariDataSource vDatasource = new HikariDataSource();
-        return vDatasource;
+    public DataSource flowableDataSource() {
+        return DataSourceBuilder.create().type(HikariDataSource.class).build();
+      //  HikariDataSource vDatasource = new HikariDataSource();
+      //  return vDatasource;
     }
 
+    @Bean
+    @ConfigurationProperties(
+            prefix = "spring.datasource.p"
+    )
+    public DataSource pDataSource() {
+        return DataSourceBuilder.create().type(HikariDataSource.class).build();
+        //HikariDataSource vDatasource = new HikariDataSource();
+        //return vDatasource;
+    }
 }

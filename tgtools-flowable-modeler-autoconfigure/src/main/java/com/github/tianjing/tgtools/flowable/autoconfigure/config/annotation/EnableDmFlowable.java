@@ -1,6 +1,8 @@
 package com.github.tianjing.tgtools.flowable.autoconfigure.config.annotation;
 
 import com.github.tianjing.tgtools.flowable.autoconfigure.config.DmApplicationConfiguration;
+import com.github.tianjing.tgtools.flowable.autoconfigure.config.DmDataSourceTransactionManagerAutoConfiguration;
+import com.github.tianjing.tgtools.flowable.autoconfigure.config.DmEventRegistryAutoConfiguration;
 import com.github.tianjing.tgtools.flowable.autoconfigure.config.FlowableConfig;
 import org.flowable.spring.boot.FlowableJpaAutoConfiguration;
 import org.flowable.spring.boot.FlowableSecurityAutoConfiguration;
@@ -32,25 +34,27 @@ import java.lang.annotation.Target;
 @Documented
 @ImportAutoConfiguration(
         value = {DmApplicationConfiguration.class,
-                AppDispatcherServletConfiguration.class ,
-                FlowableConfig.class},
+                AppDispatcherServletConfiguration.class,
+                FlowableConfig.class,
+                DmDataSourceTransactionManagerAutoConfiguration.class,
+                DmEventRegistryAutoConfiguration.class},
 
         exclude = {SecurityAutoConfiguration.class
-        , FlowableSecurityAutoConfiguration.class
-        , FlowableLdapAutoConfiguration.class
-        , CmmnEngineServicesAutoConfiguration.class
-        , CmmnEngineAutoConfiguration.class
-        , IdmEngineServicesAutoConfiguration.class
-        , IdmEngineAutoConfiguration.class
-        , DmnEngineServicesAutoConfiguration.class
-        , DmnEngineAutoConfiguration.class
-        , ContentEngineServicesAutoConfiguration.class
-        , ContentEngineAutoConfiguration.class
-        , FormEngineServicesAutoConfiguration.class
-        , FormEngineAutoConfiguration.class
-        , FlowableJpaAutoConfiguration.class
-        , ProcessEngineAutoConfiguration.class
-}
+                , FlowableSecurityAutoConfiguration.class
+                , FlowableLdapAutoConfiguration.class
+                , CmmnEngineServicesAutoConfiguration.class
+                , CmmnEngineAutoConfiguration.class
+                , IdmEngineServicesAutoConfiguration.class
+                , IdmEngineAutoConfiguration.class
+                , DmnEngineServicesAutoConfiguration.class
+                , DmnEngineAutoConfiguration.class
+                , ContentEngineServicesAutoConfiguration.class
+                , ContentEngineAutoConfiguration.class
+                , FormEngineServicesAutoConfiguration.class
+                , FormEngineAutoConfiguration.class
+                , FlowableJpaAutoConfiguration.class
+                , ProcessEngineAutoConfiguration.class
+        }
 )
 public @interface EnableDmFlowable {
 }

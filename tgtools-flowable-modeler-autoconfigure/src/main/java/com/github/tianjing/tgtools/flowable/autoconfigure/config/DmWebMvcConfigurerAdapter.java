@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  **/
 
 @Configuration
-public class MyWebMvcConfigurerAdapter  implements WebMvcConfigurer {
+public class DmWebMvcConfigurerAdapter  implements WebMvcConfigurer {
     //静态资源配置
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

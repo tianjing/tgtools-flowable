@@ -1,3 +1,18 @@
+#spring.datasource.driver-class-name: dm.jdbc.driver.DmDriver
+#spring.datasource.url: jdbc:dm://192.168.88.128:5235
+#spring.datasource.username: FLOWABLE6_5
+#spring.datasource.password: FLOWABLE6_5
+#spring.datasource.type: com.zaxxer.hikari.HikariDataSource
+#spring.datasource.hikari.minimum-idle: 5
+#spring.datasource.hikari.maximum-pool-size: 15
+#spring.datasource.hikari.auto-commit: true
+#spring.datasource.hikari.idle-timeout: 30000
+#spring.datasource.hikari.pool-name: DatebookHikariCP
+#spring.datasource.hikari.max-lifetime: 1800000
+#spring.datasource.hikari.connection-timeout: 30000
+#spring.datasource.hikari.connection-test-query: SELECT 1
+
+
 spring.datasource.dev.name: platform
 spring.datasource.dev.jdbcUrl: jdbc:dm://192.168.88.128:5235
 spring.datasource.dev.username: FLOWABLE6_5
@@ -25,3 +40,27 @@ spring.datasource.dev.loginTimeout: 5
 #flowable.common.app.idm-url: http://localhost:8080/flowable-idm
 #flowable.common.app.idm-admin.user: admin
 #flowable.common.app.idm-admin.password: test
+
+spring.datasource.p.name: platform
+spring.datasource.p.jdbcUrl: jdbc:dm://192.168.88.128:5235
+spring.datasource.p.username: WCPT
+spring.datasource.p.password: WCPT123456
+spring.datasource.p.driverClassName: dm.jdbc.driver.DmDriver
+spring.datasource.p.initialSize: 5
+spring.datasource.p.minIdle: 5
+spring.datasource.p.maxActive: 20
+spring.datasource.p.maxWait: 60000
+spring.datasource.p.poolPreparedStatements: true
+spring.datasource.p.maxPoolPreparedStatementPerConnectionSize: 20
+spring.datasource.p.useGlobalDataSourceStat: true
+spring.datasource.p.logType: slf4j
+spring.datasource.p.timeBetweenEvictionRunsMillis: 60000
+spring.datasource.p.minEvictableIdleTimeMillis: 300000
+spring.datasource.p.validationQuery: SELECT 1
+spring.datasource.p.testWhileIdle: true
+spring.datasource.p.testOnBorrow: false
+spring.datasource.p.testOnReturn: true
+spring.datasource.p.idleTimeout: 60000
+spring.datasource.p.connectionTimeout: 60000
+spring.datasource.p.validationTimeout: 3000
+spring.datasource.p.loginTimeout: 5
