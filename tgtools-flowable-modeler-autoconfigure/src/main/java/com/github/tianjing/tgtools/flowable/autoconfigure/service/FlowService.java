@@ -265,13 +265,28 @@ public class FlowService {
      * 启动流程时会同时增加一条业务数据
      *
      * @param pBusinessKey 业务主键
-     * @param pFlowid      流程ID
+     * @param pFlowId      流程ID
      * @param pUserID      用户ID
      * @return 返回业务主键
      * @throws APPErrorException
      */
-    public String[] startFlow(String pBusinessKey, String pFlowid, String pUserID) throws APPErrorException {
-        return startFlow(pBusinessKey, pFlowid, pUserID, new HashMap<String, Object>());
+    public String[] startFlow(String pBusinessKey, String pFlowId, String pUserID) throws APPErrorException {
+        return startFlow(pBusinessKey, pFlowId, pUserID, new HashMap<String, Object>());
+    }
+
+    /**
+     * 启动流程
+     * 启动流程时会同时增加一条业务数据
+     *
+     * @param pBusinessKey 业务主键
+     * @param pFlowid      流程ID
+     * @param pUserID      用户ID
+     * @param useClaimTask 是否签收
+     * @return 返回业务主键
+     * @throws APPErrorException
+     */
+    public String[] startFlow(String pBusinessKey, String pFlowid, String pUserID, boolean useClaimTask) throws APPErrorException {
+        return startFlow(pBusinessKey, pFlowid, pUserID, new HashMap<String, Object>(), useClaimTask);
     }
 
     /**
@@ -286,6 +301,22 @@ public class FlowService {
      * @throws APPErrorException
      */
     public String[] startFlow(String pBusinessKey, String pFlowid, String pUserID, Map<String, Object> pSelectVariables) throws APPErrorException {
+        return startFlow(pBusinessKey, pFlowid, pUserID, pSelectVariables, true);
+    }
+
+    /**
+     * 启动流程
+     * 启动流程时会同时增加一条业务数据
+     *
+     * @param pBusinessKey     业务主键
+     * @param pFlowid          流程ID
+     * @param pUserID          用户ID
+     * @param pSelectVariables 启动变量
+     * @param useClaimTask     是否签收
+     * @return 返回业务主键
+     * @throws APPErrorException
+     */
+    public String[] startFlow(String pBusinessKey, String pFlowid, String pUserID, Map<String, Object> pSelectVariables, boolean useClaimTask) throws APPErrorException {
         if (StringUtil.isNullOrEmpty(pBusinessKey)) {
             throw new APPErrorException("无效的业务ID");
         }
@@ -304,7 +335,10 @@ public class FlowService {
         String taskid = task.getId();
         task.setDescription("流程启动");
         ProcessEngines.getDefaultProcessEngine().getTaskService().saveTask(task);
-        claimTask(taskid, pUserID);
+
+        if (useClaimTask) {
+            claimTask(taskid, pUserID);
+        }
 
         return new String[]{id, taskid};
     }
@@ -317,7 +351,7 @@ public class FlowService {
      * @param pUserID      业务ID
      * @throws APPErrorException
      */
-    public void deleteFlowBykey(String pBusinessKey, String pUserID) throws APPErrorException {
+    public void deleteFlowByKey(String pBusinessKey, String pUserID) throws APPErrorException {
         if (StringUtil.isNullOrEmpty(pBusinessKey)) {
             throw new APPErrorException("无效的业务ID");
         }
@@ -329,17 +363,45 @@ public class FlowService {
     }
 
     /**
+     * 删除流程实例
+     * 删除一个正在处理的流程
+     *
+     * @param pBusinessKey 业务ID
+     * @param pUserID      业务ID
+     * @throws APPErrorException
+     */
+    @Deprecated
+    public void deleteFlowBykey(String pBusinessKey, String pUserID) throws APPErrorException {
+        deleteFlowBykey(pBusinessKey, pUserID);
+    }
+
+    /**
      * 发送流程
      *
      * @param pIsBack          true:回退，false 向下扭转
      * @param pBusinessKey     业务ID
-     * @param pTaskid          taskID
+     * @param pTaskId          taskID
      * @param pUserID          用户ID
      * @param pSelectVariables 选中的节点 或 扭转的变量信息
      * @throws APPErrorException
      */
-    public void sendFlow(boolean pIsBack, String pBusinessKey, String pTaskid, String pUserID, Map<String, Object> pSelectVariables) throws APPErrorException {
-        sendFlow(pIsBack, pBusinessKey, pTaskid, pUserID, pSelectVariables, false);
+    public void sendFlow(boolean pIsBack, String pBusinessKey, String pTaskId, String pUserID, Map<String, Object> pSelectVariables) throws APPErrorException {
+        sendFlow(pIsBack, pBusinessKey, pTaskId, pUserID, pSelectVariables, false);
+    }
+
+    /**
+     * 发送流程
+     *
+     * @param pIsBack          true:回退，false 向下扭转
+     * @param pBusinessKey     业务ID
+     * @param pTaskId          taskID
+     * @param pUserID          用户ID
+     * @param pSelectVariables 选中的节点 或 扭转的变量信息
+     * @param pLocalScope      是否使用局部变量，pSelectVariables 只在本次提交有效
+     * @throws APPErrorException
+     */
+    public void sendFlow(boolean pIsBack, String pBusinessKey, String pTaskId, String pUserID, Map<String, Object> pSelectVariables, boolean pLocalScope) throws APPErrorException {
+        sendFlow(pIsBack, pBusinessKey, pTaskId, pUserID, pSelectVariables, pLocalScope, true);
     }
 
     /**
@@ -351,9 +413,10 @@ public class FlowService {
      * @param pUserID          用户ID
      * @param pSelectVariables 选中的节点 或 扭转的变量信息
      * @param pLocalScope      是否使用局部变量，pSelectVariables 只在本次提交有效
+     * @param useClaimTask     是否签收
      * @throws APPErrorException
      */
-    public void sendFlow(boolean pIsBack, String pBusinessKey, String pTaskid, String pUserID, Map<String, Object> pSelectVariables, boolean pLocalScope) throws APPErrorException {
+    public void sendFlow(boolean pIsBack, String pBusinessKey, String pTaskid, String pUserID, Map<String, Object> pSelectVariables, boolean pLocalScope, boolean useClaimTask) throws APPErrorException {
         HistoricProcessInstance hpi = getHistoricProcessInstance(pBusinessKey);
         String pdi = hpi.getProcessDefinitionId();
         String procid = hpi.getId();
@@ -371,9 +434,9 @@ public class FlowService {
         task.setDescription(pIsBack ? "用户回退" : "用户发送");
         taskService.saveTask(task);
         if (!pIsBack) {
-            nextFlow(pTaskid, pUserID, vars, pLocalScope);
+            nextFlow(pTaskid, pUserID, vars, pLocalScope, useClaimTask);
         } else {
-            backFlow(pBusinessKey, pTaskid, pUserID, vars, pLocalScope);
+            backFlow(pBusinessKey, pTaskid, pUserID, vars, pLocalScope, useClaimTask);
         }
     }
 
@@ -386,6 +449,19 @@ public class FlowService {
      * @throws APPErrorException
      */
     public void abortFlow(String pTaskID, String pBusinessKey, String pUserID) throws APPErrorException {
+        abortFlow(pTaskID, pBusinessKey, pUserID, true);
+    }
+
+    /**
+     * 作废流程
+     *
+     * @param pTaskID      流程ID
+     * @param pBusinessKey 业务ID
+     * @param pUserID      用户ID
+     * @param useClaimTask 是否签收
+     * @throws APPErrorException
+     */
+    public void abortFlow(String pTaskID, String pBusinessKey, String pUserID, boolean useClaimTask) throws APPErrorException {
         validStringParam("pTaskID", pTaskID);
         validStringParam("pBusinessKey", pBusinessKey);
         validStringParam("pUserID", pUserID);
@@ -397,7 +473,11 @@ public class FlowService {
         task.setDescription("用户作废");
         TaskService taskService = ProcessEngines.getDefaultProcessEngine().getTaskService();
         taskService.saveTask(task);
-        claimTask(pTaskID, pUserID);
+
+        if (useClaimTask) {
+            claimTask(pTaskID, pUserID);
+        }
+
         ProcessEngines.getDefaultProcessEngine().getRuntimeService().deleteProcessInstance(task.getProcessInstanceId(), "用户作废");
         taskService.deleteTask(pTaskID, "用户作废");
         // ActivityImpl endActivity = findActivitiImpl(pTaskID, "end");
@@ -443,7 +523,7 @@ public class FlowService {
      * @param pVariables
      */
     public void nextFlow(String pTaskid, String pUserID, Map<String, Object> pVariables) throws APPErrorException {
-        nextFlow(pTaskid, pUserID, pVariables, false);
+        nextFlow(pTaskid, pUserID, pVariables, false, true);
     }
 
     /**
@@ -452,15 +532,20 @@ public class FlowService {
      * @param pTaskid
      * @param pUserID
      * @param pVariables
-     * @param pLocalScope 是否使用局部变量，pSelectVariables 只在本次提交有效
+     * @param pLocalScope  是否使用局部变量，pSelectVariables 只在本次提交有效
+     * @param useClaimTask 是否签收
      */
-    public void nextFlow(String pTaskid, String pUserID, Map<String, Object> pVariables, boolean pLocalScope) throws APPErrorException {
+    public void nextFlow(String pTaskid, String pUserID, Map<String, Object> pVariables, boolean pLocalScope, boolean useClaimTask) throws APPErrorException {
         validStringParam("pTaskid", pTaskid);
         validStringParam("pUserID", pUserID);
 
 
         TaskService taskService = ProcessEngines.getDefaultProcessEngine().getTaskService();
-        claimTask(pTaskid, pUserID);//签收
+
+        if (useClaimTask) {
+            claimTask(pTaskid, pUserID);//签收
+        }
+
         taskService.complete(pTaskid, pVariables, pLocalScope);//流转
 
     }
@@ -475,31 +560,32 @@ public class FlowService {
      * @throws APPErrorException
      */
     public void backFlow(String pBusinessKey, String pTaskid, String pUserID, Map<String, Object> pVariables) throws APPErrorException {
-        backFlow(pBusinessKey, pTaskid, pUserID, pVariables, false);
+        backFlow(pBusinessKey, pTaskid, pUserID, pVariables, false, true);
     }
 
     /**
      * 回退流程
      * 如果回退的是第一个usertask 则将自动签收
      *
-     * @param pTaskid
+     * @param pTaskId
      * @param pUserID
      * @param pVariables
-     * @param pLocalScope 是否使用局部变量，pSelectVariables 只在本次提交有效
+     * @param pLocalScope  是否使用局部变量，pSelectVariables 只在本次提交有效
+     * @param useClaimTask 是否签收
      * @throws APPErrorException
      */
-    public void backFlow(String pBusinessKey, String pTaskid, String pUserID, Map<String, Object> pVariables, boolean pLocalScope) throws APPErrorException {
+    public void backFlow(String pBusinessKey, String pTaskId, String pUserID, Map<String, Object> pVariables, boolean pLocalScope, boolean useClaimTask) throws APPErrorException {
         validStringParam("pBusinessKey", pBusinessKey);
-        validStringParam("pTaskid", pTaskid);
+        validStringParam("pTaskid", pTaskId);
         validStringParam("pUserID", pUserID);
 
         if (pVariables.size() < 1) {
             throw new APPErrorException("无效的回退参数");
         }
 
-        backProcessOtherTask(pTaskid, pBusinessKey);
+        backProcessOtherTask(pTaskId, pBusinessKey);
 
-        nextFlow(pTaskid, pUserID, pVariables, pLocalScope);
+        nextFlow(pTaskId, pUserID, pVariables, pLocalScope, useClaimTask);
         Task task = getTaskWhenFirstUserTask(pBusinessKey);
         if (null != task) {
             List<HistoricTaskInstance> list = getHistoricTask(pBusinessKey);
