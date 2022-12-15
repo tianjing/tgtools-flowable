@@ -15,8 +15,8 @@
 
 spring.datasource.dev.name: platform
 spring.datasource.dev.jdbcUrl: jdbc:dm://192.168.88.128:5235
-spring.datasource.dev.username: FLOWABLE6_5
-spring.datasource.dev.password: FLOWABLE6_5
+spring.datasource.dev.username: SYSDBA
+spring.datasource.dev.password: SYSDBA
 spring.datasource.dev.driverClassName: dm.jdbc.driver.DmDriver
 spring.datasource.dev.initialSize: 5
 spring.datasource.dev.minIdle: 5
@@ -64,3 +64,9 @@ spring.datasource.p.idleTimeout: 60000
 spring.datasource.p.connectionTimeout: 60000
 spring.datasource.p.validationTimeout: 3000
 spring.datasource.p.loginTimeout: 5
+
+flowable.database-schema-update: false
+#使用自定义模式 这个必须
+flowable.engine.config.table-prefix-is-schema: true
+#使用自定义模式 这个必须
+flowable.database-table-prefix: FLOWABLE6_5.
