@@ -14,7 +14,7 @@
 
 
 spring.datasource.dev.name: platform
-spring.datasource.dev.jdbcUrl: jdbc:dm://192.168.88.128:5235
+spring.datasource.dev.jdbcUrl: jdbc:dm://192.168.88.1:5236
 spring.datasource.dev.username: SYSDBA
 spring.datasource.dev.password: SYSDBA
 spring.datasource.dev.driverClassName: dm.jdbc.driver.DmDriver
@@ -42,7 +42,7 @@ spring.datasource.dev.loginTimeout: 5
 #flowable.common.app.idm-admin.password: test
 
 spring.datasource.p.name: platform
-spring.datasource.p.jdbcUrl: jdbc:dm://192.168.88.128:5235
+spring.datasource.p.jdbcUrl: jdbc:dm://192.168.88.1:5236
 spring.datasource.p.username: WCPT
 spring.datasource.p.password: WCPT123456
 spring.datasource.p.driverClassName: dm.jdbc.driver.DmDriver

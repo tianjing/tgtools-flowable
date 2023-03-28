@@ -1,6 +1,7 @@
 package com.github.tianjing.tgtools.flowable.webapp;
 
 import com.github.tianjing.tgtools.flowable.autoconfigure.config.annotation.EnableDmFlowable;
+import com.github.tianjing.tgtools.flowable.autoconfigure.config.annotation.EnableDmFlowableWithNewSpring;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -11,7 +12,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * @desc
  **/
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-@EnableDmFlowable
+@EnableDmFlowableWithNewSpring
 @SpringBootApplication
 public class DemoApplication {
     ;

@@ -21,23 +21,23 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TestRunnerConfig {
 
-//    @Bean
-//    public TestRunner TestRunner() {
-//        return new TestRunner();
-//    }
-//
-//    public static class TestRunner implements ApplicationRunner {
-//        @Autowired
-//        TaskService taskService;
-//
-//        @Autowired
-//        IdentityService identityService;
-//
-//        @Override
-//        public void run(ApplicationArguments args) throws Exception {
-//            taskService.createTaskQuery().taskCandidateUser("1").list();
-//            identityService.createUserQuery().tenantId("1").list();
-//        }
-//    }
+    @Bean
+    public TestRunner TestRunner() {
+        return new TestRunner();
+    }
+
+    public static class TestRunner implements ApplicationRunner {
+        @Autowired
+        TaskService taskService;
+
+        @Autowired
+        IdentityService identityService;
+
+        @Override
+        public void run(ApplicationArguments args) throws Exception {
+            taskService.createTaskQuery().taskCandidateUser("1").list();
+            identityService.createUserQuery().tenantId("1").list();
+        }
+    }
 
 }

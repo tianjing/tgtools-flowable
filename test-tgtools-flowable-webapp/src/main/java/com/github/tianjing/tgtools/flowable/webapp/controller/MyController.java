@@ -25,7 +25,10 @@ import java.util.HashMap;
 @Controller
 @RequestMapping("/data/modeler1/")
 public class MyController {
-
+    public MyController()
+    {
+        System.out.println("");
+    }
     @Autowired
     public RepositoryService repositoryService;
 
@@ -55,21 +58,33 @@ public class MyController {
     String flowId = "bbbb:2:f95a58fb-dec6-11ea-81c1-a86daa000424";
 
     @ResponseBody
-    @RequestMapping(value = "account", method = RequestMethod.GET)
+    @RequestMapping(value = "/account", method = RequestMethod.GET)
     public User account() {
         return SecurityUtils.getCurrentUserObject();
     }
-
-    @RequestMapping(value = "deloy", method = RequestMethod.GET)
+    @ResponseBody
+    @RequestMapping(value = "/deloy", method = RequestMethod.GET)
     public String deloy() throws APPErrorException {
         flowService.deloy(modelId);
         return "1";
     }
-
-    @RequestMapping(value = "start", method = RequestMethod.GET)
+    @ResponseBody
+    @RequestMapping(value = "/start", method = RequestMethod.GET)
     public String start() {
-        String vBussionId = "";
+        String vBussionId = "2321fdsafdsfdsfas";
         flowService.startFlow(flowId, vBussionId, new HashMap());
         return "1";
+    }
+    @ResponseBody
+    @RequestMapping(value = "/image", method = RequestMethod.GET,produces={"image/png"})
+    public byte[] image() {
+        String vBussionId = "2321fdsafdsfdsfas";
+        byte[] data = new byte[0];
+        try {
+            data = flowService.getHistoryHighlightImg(vBussionId);
+        } catch (APPErrorException e) {
+            e.printStackTrace();
+        }
+        return data;
     }
 }
