@@ -91,7 +91,7 @@ public class DmDatabaseConfiguration {//extends DatabaseConfiguration {
     }
 
     @Bean(destroyMethod = "clearCache")
-    public SqlSessionTemplate dmFlowableSqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
+    public SqlSessionTemplate dmFlowableSqlSessionTemplate(@Qualifier("dmFlowableSqlSessionFactory")SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 

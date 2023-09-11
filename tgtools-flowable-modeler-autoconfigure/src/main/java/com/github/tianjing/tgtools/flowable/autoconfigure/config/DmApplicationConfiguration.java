@@ -27,7 +27,6 @@ import org.springframework.web.servlet.DispatcherServlet;
  * @desc
  **/
 @Configuration
-@EnableConfigurationProperties({FlowableModelerAppProperties.class})
 @Import(value = {JacksonConfiguration.class, DmDatabaseConfiguration.class})
 @ComponentScan(basePackages = {
         "com.github.tianjing.tgtools.flowable.autoconfigure.service"

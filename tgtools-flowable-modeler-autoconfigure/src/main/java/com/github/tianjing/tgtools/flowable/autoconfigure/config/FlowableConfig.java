@@ -11,6 +11,7 @@ import org.flowable.idm.engine.configurator.IdmEngineConfigurator;
 import org.flowable.idm.engine.impl.cfg.StandaloneIdmEngineConfiguration;
 import org.flowable.spring.ProcessEngineFactoryBean;
 import org.flowable.spring.SpringProcessEngineConfiguration;
+import org.flowable.ui.modeler.properties.FlowableModelerAppProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -140,4 +141,14 @@ public class FlowableConfig {
         return processEngineFactoryBean;
     }
 
+    @ConfigurationProperties(prefix = "flowable.modeler.app")
+    @Bean
+    public FlowableModelerAppProperties flowableModelerAppProperties() {
+        FlowableModelerAppProperties conf = new FlowableModelerAppProperties();
+        if (StringUtil.isNotEmpty(databaseTablePrefix)) {
+            conf.setDataSourcePrefix(databaseTablePrefix);
+        }
+
+        return conf;
+    }
 }
